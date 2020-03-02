@@ -29,12 +29,12 @@ public class Main{
     private static Set<String> readTags2Skip(){
         // create a Set of tags to be ignored when scanning HTML file
         // the file is named SelfClosingTags
-        Set<String> taglist = new TreeSet<String>();
+        Set<String> taglist = new TreeSet<>();
 
         // TODO
-        String s = ""; //declare empty string to temporarily save the string in a line
+        String s; //declare empty string to temporarily save the string in a line
         try {
-            FileReader fr = new FileReader("src/SelfClosingTags.txt"); //include file name
+            FileReader fr = new FileReader("src/SelfClosingTags"); //include file name
             BufferedReader br = new BufferedReader(fr);
 
             //put s = br.readLine() inside the loop in order to update variable "s"
@@ -50,7 +50,7 @@ public class Main{
         return taglist;
     }
 
-    public static void main(String args[]){
+    public static void main(String[] args){
 
         // read names of SelfClosingTags from file and create a Set
         Set<String> selfClosingTags = readTags2Skip();
@@ -88,6 +88,7 @@ public class Main{
         // TODO
         // create an empty Stack
         Stack<String> myStack = new Stack<>();
+        myStack.push("null"); //push an "null" string onto the stack to avoid EmptyStackException thrown by peek() method
 
 
         // TODO
@@ -110,6 +111,10 @@ public class Main{
             else{
                 myStack.push(m.group(2)); //if it does not match, it should be pushed onto the stack
             }
+        }
+
+        if(myStack.size() == 1){ //if there is only "null" on the stack, we clear the stack and return balanced
+            myStack.pop();
         }
 
 
