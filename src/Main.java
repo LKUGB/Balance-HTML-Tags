@@ -12,6 +12,8 @@
  */
 
 // Imports
+import java.util.Scanner;
+import java.io.BufferedReader;
 import java.util.regex.*;
 import java.util.Stack;
 import java.util.*;
@@ -30,7 +32,21 @@ public class Main{
         Set<String> taglist = new TreeSet<String>();
 
         // TODO
+        String s = ""; //declare empty string to temporarily save the string in a line
+        try {
+            FileReader fr = new FileReader("src/SelfClosingTags.txt"); //include file name
+            BufferedReader br = new BufferedReader(fr);
 
+            //put s = br.readLine() inside the loop in order to update variable "s"
+            while ((s = br.readLine()) != null) {
+                taglist.add(s); //use add(E e) method to add the string to the set
+            }
+            fr.close(); //close the file
+        }
+        //jump to catch statement when error is found during the file read
+        catch(Exception e){
+            e.printStackTrace(); //print out the error message if the file not found exception occurs
+        }
         return taglist;
     }
 
@@ -43,10 +59,17 @@ public class Main{
         // ask user for a URL, including http:// or https://
         // read the URL and use a method in the ReadWebPage class
         // to read the web page into a String
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Please enter a URL to check the balance of its tags: ");
+        String url = scnr.nextLine();
+        String html = ReadWebPage.readWebPage(url); //call static method from ReadWebPage class
+
 
         // TODO
         // Remove HTML comments from the String containing the HTML
-        // The Regex pattern will match HTML comments
+        // The Regex pattern "(?=<!--)([\\s\\S]*?)-->" will match HTML comments
+        html = html.replaceAll( "(?=<!--)([\\s\\S]*?)-->", "");
+
 
         // TODO
         // compile a Pattern to match HTML tags
@@ -58,6 +81,12 @@ public class Main{
         // using a regular expression, set up a matcher for finding
         // a "<tag" or "</tag" in the web page. This Matcher object
         // must be used inside a loop to find the tags one by one
+        Pattern p = Pattern.compile("<(/?)([a-zA-Z]+)");
+        Matcher m = p.matcher(html);
+        while(m.find()){
+            System.out.println();
+        }
+
 
         // TODO
         // create an empty Stack
