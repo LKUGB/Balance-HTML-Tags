@@ -83,31 +83,42 @@ public class Main{
         // must be used inside a loop to find the tags one by one
         Pattern p = Pattern.compile("<(/?)([a-zA-Z]+)");
         Matcher m = p.matcher(html);
-        while(m.find()){
-            System.out.println();
-        }
 
 
         // TODO
         // create an empty Stack
+        Stack<String> myStack = new Stack<>();
+
 
         // TODO
         // Repeatedly use the find() method for Matchers to locate
         // tags. Note that using the pattern identified above, the
         // tag will be identified as the matcher's group(2)
+        while(m.find()){
+
 
         // TODO
         // use the Stack .push() and .pop() methods to determine whether
         // or not the tags in the file are paired correctly. Any tag in
         // the selfClosingTags Set should be ignored.
+            if(selfClosingTags.contains(m.group(2))) {
+                continue; //if it is a selfClosingTag, we ignore and continue
+            }
+            else if(m.group(2).equals(myStack.peek())){
+                myStack.pop(); //if it matches the top of the stack, we pop the stack
+            }
+            else{
+                myStack.push(m.group(2)); //if it does not match, it should be pushed onto the stack
+            }
+        }
+
 
         // TODO
         // If the Stack is empty the tags were balanced, else they were not.
         // Report the results with messages such as the following.  Your
         // variable names may be different.
 
-        //System.out.println("Analysis of " + URLname);
-        //System.out.println("The HTML tags are" +
-        //                     (myStack.empty() ? "" : " not") + " balanced.");
+        System.out.println("Analysis of " + url);
+        System.out.println("The HTML tags are" + (myStack.empty() ? "" : " not") + " balanced.");
     }
 }
