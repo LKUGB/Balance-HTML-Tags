@@ -5,9 +5,11 @@
  * Initial developer:  Stan Thomas
  * Illustrates use of:  String, StringBuilder, RegEx, TreeSet, Stack
  *
- * Modified and submitted by:
+ * Modified and submitted by: Shiming Jin
  *
- * Honor statement:
+ * Honor statement: The code submitted for this project was developed by
+ * Shiming Jin without outside assistance or consultation
+ * except as allowed by the instructions for this project.
  *
  */
 
@@ -113,7 +115,7 @@ public class Main{
             }
         }
 
-        if(myStack.size() == 1){ //if there is only "null" on the stack, we clear the stack and return balanced
+        if(myStack.size() == 1){ //if there is only "null" on the stack, we clear the stack and state that the tags are balanced
             myStack.pop();
         }
 
